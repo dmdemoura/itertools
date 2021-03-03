@@ -1,11 +1,15 @@
-#![cfg(feature = "use_std")]
+#![cfg(any(feature = "use_std", feature = "use_hashbrown"))]
 
 use crate::MinMaxResult;
+#[cfg(all(feature = "use_std", not(feature = "hashbrown")))]
 use std::collections::HashMap;
 use std::cmp::Ordering;
 use std::hash::Hash;
 use std::iter::Iterator;
 use std::ops::{Add, Mul};
+
+#[cfg(feature = "use_hashbrown")]
+use hashbrown::HashMap;
 
 /// A wrapper to allow for an easy [`into_grouping_map_by`](../trait.Itertools.html#method.into_grouping_map_by)
 #[derive(Clone, Debug)]

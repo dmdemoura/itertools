@@ -1,8 +1,13 @@
-#![cfg(feature = "use_std")]
+#![cfg(any(feature = "use_std", feature = "use_hashbrown"))]
 
+use alloc::vec::Vec;
+#[cfg(all(feature = "use_std", not(feature = "hashbrown")))]
 use std::collections::HashMap;
 use std::hash::Hash;
 use std::iter::Iterator;
+
+#[cfg(feature = "use_hashbrown")]
+use hashbrown::HashMap;
 
 /// Return a `HashMap` of keys mapped to a list of their corresponding values.
 ///

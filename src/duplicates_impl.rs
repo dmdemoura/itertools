@@ -1,9 +1,13 @@
 use std::hash::Hash;
 
 mod private {
+    #[cfg(all(feature = "use_std", not(feature = "hashbrown")))]
     use std::collections::HashMap;
     use std::hash::Hash;
     use std::fmt;
+
+    #[cfg(feature = "use_hashbrown")]
+    use hashbrown::HashMap;
 
     #[derive(Clone)]
     #[must_use = "iterator adaptors are lazy and do nothing unless consumed"]

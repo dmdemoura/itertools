@@ -1,8 +1,15 @@
 
+#[cfg(all(feature = "use_std", not(feature = "hashbrown")))]
 use std::collections::HashMap;
+#[cfg(all(feature = "use_std", not(feature = "hashbrown")))]
 use std::collections::hash_map::{Entry};
 use std::hash::Hash;
 use std::fmt;
+
+#[cfg(feature = "use_hashbrown")]
+use hashbrown::HashMap;
+#[cfg(feature = "use_hashbrown")]
+use hashbrown::hash_map::Entry;
 
 /// An iterator adapter to filter out duplicate elements.
 ///
